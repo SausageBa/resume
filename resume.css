@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+ul,
+ol {
+    list-style: none;
+}
+
 body {
     background-color: #EFEFEF;
     color: black;
@@ -32,6 +37,55 @@ a {
     height: 520px;
     background-position: center center;
     background-size: cover
+}
+
+.yin-yang {
+    width: 96px;
+    height: 48px;
+    background: white;
+    border-width: 2px 2px 50px 2px;
+    border-style: solid;
+    border-radius: 50%;
+    position: relative;
+    animation-duration: 2s;
+    animation-name: spin;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.yin-yang::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: 18px solid black;
+    display: inline-block;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+}
+
+.yin-yang::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: black;
+    border: 18px solid white;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 0%;
 }
 
 .topNavBar .logo .RS {
@@ -101,13 +155,15 @@ a {
 
 .banner .mask {
     height: 520px;
-    background-color: rgba(0, 0, 0, 0.7)
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .usercard {
     max-width: 940px;
     margin: 0 auto;
+    margin-top: -346px;
     background-color: #FFFFFF;
+    box-shadow: 0px 1px 8px -1px rgba(128, 128, 128, 1);
 }
 
 .usercard .welcome {
@@ -194,8 +250,161 @@ h1 {
     width: 50px;
     padding: 5px 0;
     margin: 16px 16px;
+    vertical-align:top;
 }
 
 .usercard>footer.media>a:hover {
     background-color: #D05C60;
+}
+
+.Downbutton {
+    width: 280px;
+    background-color: #EFEFEF;
+    border: 1px solid #CBCDCF;
+    display: block;
+    margin: 36px auto;
+    font-weight: bold;
+    text-align: center;
+    padding: 22px 0;
+    border-radius: 2%;
+}
+
+.Downbutton:hover {
+    transition: box-shadow 0.3s;
+    box-shadow: 0px 4px 13px 0px rgba(128, 128, 128, 1);
+}
+
+.selfIntroduction {
+    max-width: 940px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: kai;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+section.skills,
+section.portfolio {
+    max-width: 940px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+section.skills>ol {
+    background-color: #fff;
+    box-shadow: 0px 4px 13px 0px rgba(128, 128, 128, 1);
+    padding: 40px 50px 10px;
+}
+
+section.skills>h2,
+section.portfolio>h2 {
+    text-align: center;
+    color: #3d4451;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.progressBar {
+    height: 6px;
+    background-color: #FBE0E1;
+    border-radius: 3px;
+    margin: 4px 0 40px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #E8676B;
+    width: 50%;
+    border-radius: 3px;
+}
+
+section.skills>ol>li {
+    float: left;
+    width: 48%;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+section.skills>ol>li:nth-child(even) {
+    float: right;
+}
+
+h3 {
+    font-size: 14px;
+    line-height: 1.1;
+    padding-right: 40px;
+    font-weight: normal;
+    color:white
+}
+
+section.portfolio>nav>ol>li {
+    float: left;
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+section.portfolio>nav>ol {
+    display: inline-block;
+    vertical-align: top;
+}
+
+section.portfolio {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+section.portfolio>nav {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 20px;
+}
+
+section.portfolio>nav>ol>li:nth-child(1) {
+    margin-left: 0;
+}
+
+section.portfolio>nav>.bar {
+    height: 6px;
+    background-color: white;
+    margin-top: 8px;
+    border-radius: 3px;
+}
+
+section.portfolio>nav>.bar>.bar-inner {
+    width: 20%;
+    background-color: #E8676B;
+    border-radius: 3px;
+    height: 100%;
+    transition: all 0.5s;
+}
+
+section.portfolio>nav>.bar.state-1>.bar-inner {
+    margin-left: 0;
+    width: 50px;
+}
+
+section.portfolio>nav>.bar.state-2>.bar-inner {
+    margin-left: 80px;
+    width: 50px;
+}
+
+section.portfolio>nav>.bar.state-3>.bar-inner {
+    margin-left: 172px;
+    width: 92px;
+}
+
+section.portfolio>.jobs {
+    position: relative;
+}
+
+section.portfolio>.jobs>div {
+    position: absolute;
+}
+section.skills > ol.olbanner{
+    background-image: url(./img/olimg.JPG);
+    background-position:center center;
+    background-size: cover;
 }
