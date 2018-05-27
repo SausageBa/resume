@@ -6,16 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的个人简历</title>
     <link rel="stylesheet" href="./resume.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.min.css">
     <script src="//at.alicdn.com/t/font_504082_3v5qldgyyhus1yvi.js"></script>
-    <style type="text/css">
-        .icon {
-            width: 1em;
-            height: 1em;
-            vertical-align: -0.15em;
-            fill: currentColor;
-            overflow: hidden;
-        }
-    </style>
 </head>
 
 <body>
@@ -67,8 +59,9 @@
         </div>
     </div>
     <main>
-        <div date-x class="usercard" id = "site-about">
-            <div  class="pictureAndtext clearfix">
+
+        <div date-x class="usercard" id="site-about">
+            <div class="pictureAndtext clearfix">
                 <div class="picture">
                     <img src="./img/avatar.jpg" alt="头像">
                 </div>
@@ -122,7 +115,7 @@
         <p class="selfIntroduction">王艺超，前端开发人员，不断完善自己的简历</p>
     </main>
     <section date-x class="skills" id="site-skills">
-        <h2 >技能列表</h2>
+        <h2>技能列表</h2>
         <ol class="clearfix olbanner">
             <li>
                 <h3>HTML5 &amp; CSS3</h3>
@@ -162,121 +155,47 @@
             </li>
         </ol>
     </section>
-    <section date-x id = "site-portfolio" class="portfolio">
-        <h2 >作品集</h2>
-        <nav>
-            <ol class="clearfix">
-                <li id="portfolio1">所有</li>
-                <li id="portfolio2">框架作品</li>
-                <li id="portfolio3">原生JS&amp;CSS</li>
-            </ol>
-            <div id="portfolioBar" class="bar state-1">
-                <div class="bar-inner"></div>
+    <section date-x id="site-portfolio" class="portfolio">
+        <h2>作品集</h2>
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <img src="./canvas.JPG" class="swiper-slide">
+                <img src="./nav.JPG" class="swiper-slide">
+                <img src="./slide.JPG" class="swiper-slide">
+
             </div>
-        </nav>
-        <script>
-            portfolio1.onclick = function () {
-                portfolioBar.className = 'bar state-1'
-            }
-            portfolio2.onclick = function () {
-                portfolioBar.className = 'bar state-2'
-            }
-            portfolio3.onclick = function () {
-                portfolioBar.className = 'bar state-3'
-            }
-        </script>
-        <div class="jobs" style="height:576px;">
-            <div class="big" style="top:0;left:0;">
-                <img src="./img/big.jpg" alt="作品1" style="width:606px;height:576px;">
-            </div>
-            <div class="small" style="top:0;left:645px;">
-                <img src="./img/small1.jpg" alt="作品2" style="width:293px; height:278px;">
-            </div>
-            <div class="small" style="top:298px;left:645px;">
-                <img src="./img/small2.jpg" alt="作品3" style="width:293px; height:278px;">
-            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
         </div>
+
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js">
-    </script>
-    <script>
-
-        let specialTags = document.querySelectorAll('[date-x]')
-            for( i = 0;i < specialTags.length;i++){
-                specialTags[i].classList.add('offset')
-            }
-        setTimeout(function(){
-            findClosest()
-        },200)
-        window.onscroll = function () {
-            if (scrollY > 0) {
-                topNavBar.classList.add('sticky')
-            } else {
-                topNavBar.classList.remove('sticky')
-            }
-            findClosest()
-        }
-        function findClosest(){
-            let specialTags = document.querySelectorAll('[date-x]')
-            let minIndex = 0         //看谁最近
-            for( i = 1;i < specialTags.length;i++){
-                if(Math.abs(specialTags[i].offsetTop-window.scrollY) < Math.abs(specialTags[minIndex].offsetTop-window.scrollY)){
-                    minIndex = i
-                }
-            }
-            //minIndex就是离窗口顶部最近的元素
-            specialTags[minIndex].classList.remove('offset')
-            let id = specialTags[minIndex].id
-            let a = document.querySelector('a[href="#' + id + '"]')
-            let li = a.parentNode
-            let brotherAndMe = li.parentNode.children
-            for(let i=0;i<brotherAndMe.length;i++){
-                brotherAndMe[i].classList.remove('highlight')
-            }
-            li.classList.add('highlight')
-        }
-
-        let liTags = document.querySelectorAll('nav.menu > ul > li')
-
-        function animate(time) {
-            requestAnimationFrame(animate);
-            TWEEN.update(time);
-        }
-        requestAnimationFrame(animate);
-
-        for (let i = 0; i < liTags.length; i++) {
-            liTags[i].onmouseenter = function (x) {
-                x.currentTarget.classList.add('active')
-            }
-            liTags[i].onmouseleave = function (x) {
-                x.currentTarget.classList.remove('active')
-            }
-        }
-        let aTags = document.querySelectorAll('nav.menu > ul > li > a ')
-        for (i = 0; i < aTags.length; i++) {
-            aTags[i].onclick = function (x) {
-                x.preventDefault()
-                let a = x.currentTarget
-                let href = a.getAttribute('href')
-                let element = document.querySelector(href)
-                let top = element.offsetTop
-                let currentTop = window.scrollY //当前的高度
-                let targetTop = top - 60 //目标位置的高度
-                var coords = {
-                    y: currentTop
-                };
-                var tween = new TWEEN.Tween(coords)
-                    .to({
-                        y: top - 60
-                    },1500)
-                    .easing(TWEEN.Easing.Bounce.Out)
-                    .onUpdate(function () {
-                        window.scrollTo(0,coords.y)
-                    })
-                    .start();
-            }
-        }
-    </script>
+    <section class="message">
+        <h2>留言板</h2>
+        <ol id="messageList">
+        </ol>
+        <form id="postMessage">
+            <input type="text" name="name" placeholder="请输入姓名">
+            <input type="text" name="content" placeholder="留言内容">
+            <input type="submit" value="提交">
+        </form>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.min.js"></script>
+    <script src="//cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>
+    <script src="./js/swiper.js"></script>
+    <script src="./js/auto-slide-up.js"></script>
+    <script src="./js/sticky.js"></script>
+    <script src="./js/highlight-navbar.js"></script>
+    <script src="./js/position.js"></script>
+    <script src="./js/message.js"></script>
 </body>
 
 </html>
