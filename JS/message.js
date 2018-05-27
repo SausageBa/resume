@@ -12,7 +12,16 @@
                 'name': name,
                 'content': content
             })
-        }
+        },
+        init: function () {
+            var APP_ID = 'j4777E0qriD4Q05pdtRTPe00-gzGzoHsz'
+            var APP_KEY = 'YQu8LNLpm2AO6jXnAnyv55n0'
+
+            AV.init({
+                appId: APP_ID,
+                appKey: APP_KEY
+            });
+        },
     }
     var controller = {
         view: null,
@@ -23,19 +32,11 @@
             this.model = model
             this.messageList = view.querySelector('#messageList')
             this.form = view.querySelector('form')
-            this.initAV()
+            this.model.init()
             this.loadMessages()
             this.bindEvents()
         },
-        initAV: function () {
-            var APP_ID = 'j4777E0qriD4Q05pdtRTPe00-gzGzoHsz'
-            var APP_KEY = 'YQu8LNLpm2AO6jXnAnyv55n0'
-
-            AV.init({
-                appId: APP_ID,
-                appKey: APP_KEY
-            });
-        },
+        
         loadMessages: function () {
             this.model.fetch().then(
                 (messages) => {
