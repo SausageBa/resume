@@ -1,10 +1,26 @@
 ! function () {
     var view = document.querySelector('section.message')
+    var model = {
+        fetch: function () {
+            var query = new AV.Query('Message');
+            return query.find()
+        },
+        save: function (name, content) {
+            var Message = AV.Object.extend('Message');
+            var message = new Message();
+            return message.save({
+                'name': name,
+                'content': content
+            })
+        }
+    }
     var controller = {
-        view : null,
+        view: null,
         messageList: null,
-        init: function (view) {
+        model : null,
+        init: function (view,model) {
             this.view = view
+            this.model = model
             this.messageList = view.querySelector('#messageList')
             this.form = view.querySelector('form')
             this.initAV()
@@ -21,8 +37,7 @@
             });
         },
         loadMessages: function () {
-            var query = new AV.Query('Message');
-            query.find().then(
+            this.model.fetch().then(
                 (messages) => {
                     var array = messages.map((items) => {
                         return items.attributes
@@ -48,19 +63,14 @@
             let myForm = this.form
             var name = myForm.querySelector('input[name=name]').value
             var content = myForm.querySelector('input[name=content]').value
-            var Message = AV.Object.extend('Message');
-            var message = new Message();
-            message.save({
-                'name': name,
-                'content': content
-            }).then(function (object) {
-                let li = document.createElement('li')
-                li.innerText = `${object.attributes.name}:${object.attributes.content}`
-                messageList.appendChild(li)
-                myForm.querySelector('input[name=name]').value = ''
-                myForm.querySelector('input[name=content]').value = ''
-            })
+                this.model.save(name,content).then(function (object) {
+                    let li = document.createElement('li')
+                    li.innerText = `${object.attributes.name}:${object.attributes.content}`
+                    messageList.appendChild(li)
+                    myForm.querySelector('input[name=name]').value = ''
+                    myForm.querySelector('input[name=content]').value = ''
+                })
         }
     }
-    controller.init(view)
+    controller.init(view,model)
 }.call()
